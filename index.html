@@ -65,7 +65,7 @@
         <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
       </a-entity>
 
-    <a-entity id="chat" layout="type: line; margin: 1.5" position="0 1.5 2.5">
+    <a-entity id="chat" layout="type: line; margin: 1.5" position="0 0 2.5">
           <a-entity template="src: #link" data-src="#sechelt" data-thumb="#camile"></a-entity>
     <a-entity
   text="value: Hello, A-Frame!; color: #BBB"
@@ -97,17 +97,32 @@
       camera_rig.setAttribute('position', 'y', 2);
       camera_rig.setAttribute('position', 'z', 4);*/
 
-      var sceneEl = document.querySelector('a-scene');
-      var chat = document.querySelector("#chat");
+AFRAME.registerComponent('scenelistener',{
+   init:function(){
+      let vrcam = document.querySelector("#cam-vr");
+      let dcam = document.querySelector("#cam-desktop");
+      let cursor = document.querySelector('[cursor]');
+      console.clear();/*from   ww  w.de mo  2  s .c  o m*/
+      console.log('init');
+      console.log('vrcam:');
+      console.log(vrcam);
+      console.log('dcam:');
+      console.log(dcam);
+      console.log('cursor:');
+      console.log(cursor);
+      this.el.sceneEl.addEventListener('enter-vr',function(){
+               cursor.setAttribute('visible',true);
+               dcam.setAttribute('camera','active',false);
+               vrcam.setAttribute('camera','active',true);
+      });
+      this.el.sceneEl.addEventListener('exit-vr',function(){
+               cursor.setAttribute('visible',false);
+               dcam.setAttribute('camera','active',true);
+               vrcam.setAttribute('camera','active',false);
+      });
+  }
+});
 
-      if(sceneEl){console.log("achei a cena");}
-      if(chat){console.log("achei o chat");}
-
-     // sceneEl.addEventListener('exit-vr', function () {
-
-//el.setAttribute("visible",false);});      
-
-      
       
      
 
