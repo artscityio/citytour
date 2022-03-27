@@ -2,9 +2,10 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="icon" href="https://artscity.io/wp-content/uploads/2022/02/cropped-arts-city-logo-icon-city-192x192.png" sizes="192x192" />
     <script>
-    var datetime = new Date().toLocaleTimeString();
-    document.title = datetime;
+    //var datetime = new Date().toLocaleTimeString();
+    document.title = "e";
     </script>
     <meta name="description" content="360&deg; Image Gallery - A-Frame">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -12,37 +13,22 @@
     <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
-    
+    <script src="https://unpkg.com/aframe-vr-mode-watcher@1.0.0/dist/aframe-vr-mode-watcher.min.js"></script> 
+
     <!-- Image link template to be reused. -->
     <script id="link" type="text/html">
       <a-entity class="link"
+
         geometry="primitive: plane; height: 1; width: 1"
         material="shader: flat; src: ${thumb}"
         event-set__mouseenter="scale: 1.2 1.2 1"
         event-set__mouseleave="scale: 1 1 1"
         event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
         proxy-event="event: click; to: #image-360; as: fade"
-        sound="on: click; src: #click-sound"></a-entity>
+        sound="on: click; src: #click-sound">
+      </a-entity>
     </script>
-
-    <script id="button" type="text/html">
-      <a-entity class="button"
-        geometry="primitive: plane; height: .6; width: 1"
-        material="shader: flat; src: ${thumb}"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
-        sound="on: click; src: #click-sound"></a-entity>
-    </script>
-
-      <script id="chat" type="text/html">
-      <a-entity class="chat"
-        geometry="primitive: plane; height: 0.6; width: 0.8"
-        material="shader: flat; src: ${thumb}"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
-        sound="on: click; src: #click-sound"
-        material.opacity = "0.8"></a-entity>
-    </script>
+    
 
 
   </head>
@@ -79,24 +65,19 @@
         <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
       </a-entity>
 
-   <a-entity id="buttons"  position="-1 2 -9" layout="type: line; margin: 2">
-        <a-entity template="src: #button" data-thumb="#button-goback"  ></a-entity>
-        <a-entity template="src: #button" data-thumb="#button-resume"  ></a-entity>
-    </a-entity>
+    <a-entity id="chat" layout="type: line; margin: 1.5" position="0 1.5 2.5">
+          <a-entity template="src: #link" data-src="#sechelt" data-thumb="#camile"></a-entity>
+    <a-entity
+  text="value: Hello, A-Frame!; color: #BBB"
+  position="-0.9 0.2 -3"
+  scale="1.5 1.5 1.5"></a-entity>
+        </a-entity>
 
-    <a-entity id="chats">
-        <a-entity template="src: #chat" data-thumb="#camile"   position="-1 1 4"  ></a-entity>
-    </a-entity>
-
-    <a-entity template="src: #button" data-thumb="#button-resume"     position="1 1 4"   ></a-entity>
-
-     
+       
       <!-- Camera + cursor. -->
-      
-      <a-entity camera look-controls position="0 1 5">
-           <!-- Image buttons. -->
-      
-        <a-cursor
+      <a-entity id="camera-rig" position="0 0.0 4">
+<a-entity camera look-controls >
+           <a-cursor
           id="cursor"
           animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
           animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
@@ -104,6 +85,32 @@
           event-set__mouseleave="_event: mouseleave; color: black"
           raycaster="objects: .link, .button, .chat"></a-cursor>
       </a-entity>
+
+      </a-entity>
+      
     </a-scene>
   </body>
+  <script>
+
+     /* var camera_rig = document.querySelector('#camera-rig');
+      camera_rig.setAttribute('position', 'x', 0);
+      camera_rig.setAttribute('position', 'y', 2);
+      camera_rig.setAttribute('position', 'z', 4);*/
+
+      var sceneEl = document.querySelector('a-scene');
+      var chat = document.querySelector("#chat");
+
+      if(sceneEl){console.log("achei a cena");}
+      if(chat){console.log("achei o chat");}
+
+     // sceneEl.addEventListener('exit-vr', function () {
+
+//el.setAttribute("visible",false);});      
+
+      
+      
+     
+
+    </script>
+
 </html>
