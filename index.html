@@ -3,10 +3,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="icon" href="https://artscity.io/wp-content/uploads/2022/02/cropped-arts-city-logo-icon-city-192x192.png" sizes="192x192" />
-    <script>
-    //var datetime = new Date().toLocaleTimeString();
-    document.title = "e";
-    </script>
+
     <meta name="description" content="360&deg; Image Gallery - A-Frame">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
@@ -29,7 +26,10 @@
       </a-entity>
     </script>
     
-
+        <script>
+    //var datetime = new Date().toLocaleTimeString();
+    document.title = "ArtsCity - The Arts'Metaverse";
+    </script>
 
   </head>
   <body>
@@ -66,22 +66,22 @@
       </a-entity>
 
     <a-entity id="chat" layout="type: line;" position="0 0 2.5" visible="false"></a-entity>
-    
-    <a-entity position="0 0 0">
-    <a-plane color="#CCC" height="0.75" width="2" position="0 0 2.5" ></a-plane>
+
+    <a-entity position="-.25 2.25 -9">
+    <a-plane color="#CCC" height="0.75" width="2.5" position=".25 0 2.5" ></a-plane>
       <a-entity template="src: #link" data-src="#sechelt" data-thumb="#camile" 
           scale="0.5 0.5"
            position="-.65 0 2.6"
       ></a-entity>
       <a-entity
-        text="value: Hello, A-Frame!; color: #000"
-        position=".45 0 2.6"  scale="1.5 1.5 1.5">
+        text="value: Hello, welcome to ArtsCity, The Arts' Metaverse. My name is Camile, and I am your host today. The City aims to be a hub for artists and art collectors from all around the World. Follow us on social media to keep updated.; color: #000"
+        position=".45 .015 2.6"  scale="1.5 1.5 1.5">
       </a-entity>
     </a-entity>
 
        
       <!-- Camera + cursor. -->
-      <a-entity id="camera-rig" position="0 0.0 4">
+      <a-entity id="camera-rig" animation="property: position; to: -1 1.6 -5; from: -1 4.5 5; dur: 9000; easing: linear; loop: false">
 <a-entity camera look-controls >
            <a-cursor
           id="cursor"
