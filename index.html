@@ -126,23 +126,28 @@
           layout="margin: 10"
           width="5"
         ></a-entity>
-        
-        <!--a-entity template="src: #link" data-src="#0xsechelt" data-thumb="#sechelt-thumb" scale="0.5 0.5"></!--a-entity-->
       </a-entity>
 
       <a-entity
         id="gallery"
-        layout="type: line; margin: 1.5"
-        position="0 -1 -9"
-        visible="false"
+        layout="margin: 0"
+        position="-0.8 -0.5 8.5"
+        visible="true"
+        rotation="0 170 0"
       >
+        <a-plane
+          color="#000"
+          height="0.75"
+          width="2"
+          position="10 0 -10"
+        ></a-plane>
         <a-entity
-          template="src: #link"
-          data-src="#cubes"
-          data-thumb="#cubes-thumb"
+          text="value: Metamodern Art Gallery; color: #fff; align: center; width:3; vertical-align: top;"
+          position="5 0.0 5"
+          layout="margin: 10"
+          width="5"
         ></a-entity>
       </a-entity>
-
       <a-entity
         id="venue"
         layout="type: line; margin: 1.5"
@@ -178,10 +183,10 @@
         </a-entity>
       </a-entity>
 
-      <!-- Camera + cursor. --dutration: 9000-->
+      <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
-        animation="property: position; from: 0 5.5 5; to: 0 2.6 -4;  dur: 0009; easing: linear; loop: false"
+        animation="property: position; from: 0 5.5 5; to: 0 2.6 5;  dur: 0801; easing: linear; loop: false"
       >
         <a-entity camera look-controls>
           <a-cursor
