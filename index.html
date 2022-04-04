@@ -106,13 +106,16 @@
         animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
       ></a-sky>
 
-      <!-- Image links. --position="-1.30 0.25 -9" -->
+
+
+      <!-- museum -->
       <a-entity
         id="museum"
         layout="margin: 0"
-        position="-1.30 0.25 -9"
+        position="-1 0.25 -9"
         visible="true"
         rotation="0 8 0"
+        scale="1.5 1.5"
       >
         <a-plane
           color="#000"
@@ -128,12 +131,38 @@
         ></a-entity>
       </a-entity>
 
+      <!-- venue -->
+      <a-entity
+        id="venue"
+        layout="margin: 0"
+        position="-3.9 -1.5 -3.4"
+        visible="true"
+        rotation="0 65 0"
+      >
+        <a-plane
+          color="#000"
+          height="0.75"
+          width="1.5"
+          position="10 0 -10"
+        ></a-plane>
+        <a-entity
+          text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
+          position="0 0 0"
+          layout="margin: 10"
+          width="4"
+        ></a-entity>
+      </a-entity>
+
+
+
+
+      <!-- gallery -->
       <a-entity
         id="gallery"
         layout="margin: 0"
-        position="-0.8 -0.5 8.5"
+        position="-1.12 -1.48 7.244"
         visible="true"
-        rotation="0 170 0"
+        rotation="0 165 0"
       >
         <a-plane
           color="#000"
@@ -142,10 +171,10 @@
           position="10 0 -10"
         ></a-plane>
         <a-entity
-          text="value: Metamodern Art Gallery; color: #fff; align: center; width:3; vertical-align: top;"
+          text="value: Metamodern Art Gallery; color: #fff; align: center; width:4; vertical-align: top;"
           position="5 0.0 5"
           layout="margin: 10"
-          width="5"
+          width="6"
         ></a-entity>
       </a-entity>
       <a-entity
@@ -161,7 +190,8 @@
         ></a-entity>
       </a-entity>
 
-      <a-entity position="-.25 2.25 -9">
+      <!-- camile -->
+      <a-entity position="-.25 .8 -4">
         <a-plane
           color="#CCC"
           height="0.75"
@@ -176,7 +206,7 @@
           position="-.65 0 2.6"
         ></a-entity>
         <a-entity
-          text="value: Hello, welcome to ArtsCity, The Arts' Metaverse. My name is Camile, and I am your host today. The City aims to be a hub for artists and art collectors from all around the World. Follow us on social media to keep updated.; color: #000"
+          text="value: Hello, welcome to ArtsCity - The Arts' Metaverse. My name is Camile, and I am your host today.  Please feel free to walk around.; color: #000"
           position=".45 .015 2.6"
           scale="1.5 1.5 1.5"
         >
@@ -186,8 +216,9 @@
       <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
-        animation="property: position; from: 0 5.5 5; to: 0 2.6 5;  dur: 0801; easing: linear; loop: false"
+        animation="property: position; from: 0 8 0; to: 0 0.0 0;  dur: 6001; easing: linear; loop: false"
       >
+        
         <a-entity camera look-controls>
           <a-cursor
             id="cursor"
@@ -197,6 +228,7 @@
             event-set__mouseleave="_event: mouseleave; color: black"
             raycaster="objects: .link, .button, .chat"
           ></a-cursor>
+          
         </a-entity>
       </a-entity>
     </a-scene>
