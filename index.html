@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>budega veia</title>
+    <title></title>
     <link
       rel="icon"
       href="https://artscity.io/wp-content/uploads/2022/02/cropped-arts-city-logo-icon-city-192x192.png"
@@ -18,8 +18,7 @@
 
     <!-- Image link template to be reused. -->
     <script id="link" type="text/html">
-      <a-entity
-        class="link"
+      <a-entity class="link"
         geometry="primitive: plane; height: 1; width: 1"
         material="shader: flat; src: ${thumb}"
         event-set__mouseenter="scale: 1.2 1.2 1"
@@ -27,13 +26,24 @@
         event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
         proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
-      >
-      </a-entity>
+      >      </a-entity>
     </script>
+
+    <script id="portal" type="text/html">
+      <a-entity class="portal"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+        proxy-event="event: click; to: #image-360; as: fade"
+      >      </a-entity>
+    </script>
+
+
+
 
     <script>
       //var datetime = new Date().toLocaleTimeString();
-      document.title = "our f. ArtsCity - The AArts'Metaversooo, Man?!";
+      document.title = "Arts City";
     </script>
   </head>
   <body>
@@ -106,13 +116,16 @@
         animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
       ></a-sky>
 
-      <!-- Image links. --position="-1.30 0.25 -9" -->
+
+
+      <!-- museum -->
       <a-entity
         id="museum"
         layout="margin: 0"
-        position="-1.30 0.25 -9"
+        position="-1 0.25 -9"
         visible="true"
         rotation="0 8 0"
+        scale="1.5 1.5"
       >
         <a-plane
           color="#000"
@@ -126,29 +139,71 @@
           layout="margin: 10"
           width="5"
         ></a-entity>
-        
-        <!--a-entity template="src: #link" data-src="#0xsechelt" data-thumb="#sechelt-thumb" scale="0.5 0.5"></!--a-entity-->
       </a-entity>
 
+      <!-- venue -->
+      <a-entity
+        id="venue"
+        layout="margin: 0"
+        position="-3.9 -1.5 -3.4"
+        visible="true"
+        rotation="0 65 0"
+        
+      >
+
+      
+        <a-plane
+          color="#000"
+          height="0.75"
+          width="1.5"
+          position="10 0 -10"
+        class="portal"
+                  data-src="#cubes"
+                   event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+                event-set__click="_target: #image-360; _delay: 300; material.src: #cubes"
+
+           proxy-event="event: click; to: #image-360; as: fade"
+        sound="on: click; src: #click-sound"
+               
+
+        ></a-plane>
+        <a-entity
+          text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
+          position="0 0 0"
+          layout="margin: 10"
+          width="4"
+        ></a-entity>
+ 
+
+        
+      </a-entity>
+
+
+
+
+      <!-- gallery -->
       <a-entity
         id="gallery"
-        layout="type: line; margin: 1.5"
-        position="0 -1 -9"
-        visible="false"
+        layout="margin: 0"
+        position="-1.12 -1.48 7.244"
+        visible="true"
+        rotation="0 165 0"
       >
+        <a-plane
+          color="#000"
+          height="0.75"
+          width="2"
+          position="10 0 -10"
+        ></a-plane>
         <a-entity
-          template="src: #link"
-          data-src="#cubes"
-          data-thumb="#cubes-thumb"
+          text="value: Metamodern Art Gallery; color: #fff; align: center; width:4; vertical-align: top;"
+          position="5 0.0 5"
+          layout="margin: 10"
+          width="6"
         ></a-entity>
       </a-entity>
 
-      <a-entity
-        id="venue"
-        layout="type: line; margin: 1.5"
-        position="2 -1 -9"
-        visible="false"
-      >
         <a-entity
           template="src: #link"
           data-src="#city"
@@ -156,7 +211,8 @@
         ></a-entity>
       </a-entity>
 
-      <a-entity position="-.25 2.25 -9">
+      <!-- camile -->
+      <a-entity position="-.25 .8 -4">
         <a-plane
           color="#CCC"
           height="0.75"
@@ -171,18 +227,19 @@
           position="-.65 0 2.6"
         ></a-entity>
         <a-entity
-          text="value: Hello, welcome to ArtsCity, The Arts' Metaverse. My name is Camile, and I am your host today. The City aims to be a hub for artists and art collectors from all around the World. Follow us on social media to keep updated.; color: #000"
+          text="value: Hello, welcome to ArtsCity - The Arts' Metaverse. My name is Camile, and I am your host today.  Please feel free to walk around.; color: #000"
           position=".45 .015 2.6"
           scale="1.5 1.5 1.5"
         >
         </a-entity>
       </a-entity>
 
-      <!-- Camera + cursor. --dutration: 9000-->
+      <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
-        animation="property: position; from: 0 5.5 5; to: 0 2.6 -4;  dur: 0009; easing: linear; loop: false"
+        animation="property: position; from: 0 8 0; to: 0 0.0 0;  dur: 6001; easing: linear; loop: false"
       >
+        
         <a-entity camera look-controls>
           <a-cursor
             id="cursor"
@@ -190,8 +247,9 @@
             animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
             event-set__mouseenter="_event: mouseenter; color: springgreen"
             event-set__mouseleave="_event: mouseleave; color: black"
-            raycaster="objects: .link, .button, .chat"
+            raycaster="objects: .link, .portal, .chat"
           ></a-cursor>
+          
         </a-entity>
       </a-entity>
     </a-scene>
