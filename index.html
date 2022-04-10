@@ -188,7 +188,7 @@
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
-        clickhandler="txt:image1"
+        togglescenes="show:venue-assets"
         
       >
 
@@ -312,15 +312,15 @@
     </a-scene>
   </body>
   <script>
-AFRAME.registerComponent('clickhandler', {
+AFRAME.registerComponent('togglescenes', {
         schema: {
-          txt: {default:'default'}
+          show: {default:'default'}
         },        
         init: function () {
           var data = this.data;
           var el = this.el;        
           el.addEventListener('click', function () {            
-           console.log(data.txt);
+           console.log(data.show);
           });        
         }
       });
