@@ -49,37 +49,12 @@
   <body>
     <a-scene>
       <a-assets>
-        <img
-          id="city"
-          crossorigin="anonymous"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg"
-        />
-        <img
-          id="city-thumb"
-          crossorigin="anonymous"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg"
-        />
-        <img
-          id="cubes-thumb"
-          crossorigin="anonymous"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg"
-        />
-        <img
-          id="sechelt-thumb"
-          crossorigin="anonymous"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"
-        />
         <audio
           id="click-sound"
           crossorigin="anonymous"
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
         ></audio>
-        <img
-          id="cubes"
-          crossorigin="anonymous"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"
-        />
-        <img
+       <img
           id="360venue01"
           crossorigin="anonymous"
           src="https://res.cloudinary.com/artscity-io/image/upload/v1649111148/spaces_du0swv.jpg"
@@ -98,16 +73,6 @@
           id="sechelt"
           crossorigin="anonymous"
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
-        />
-        <img
-          id="button-goback"
-          crossorigin="anonymous"
-          src="https://res.cloudinary.com/artscity-io/image/upload/v1648322640/button-go-back_rtexou.jpg"
-        />
-        <img
-          id="button-resume"
-          crossorigin="anonymous"
-          src="https://res.cloudinary.com/artscity-io/image/upload/v1648322640/button-resume-tour_pp5rja.jpg"
         />
         <img
           id="camile"
@@ -137,11 +102,15 @@
       />
      </a-assets>
 
-<a-entity position="1.82414 0.49782 -8" rotation="-6.339778003122559 2.868226722424901 0.12948846169956604" class="venue-entity">
+<a-entity 
+          class="flex-entity venue-entity"
+          position="1.82414 0.49782 -8" rotation="-6.339778003122559 2.868226722424901 0.12948846169956604" class="venue-entity">
     <a-image src="#venue-wall-02" scale="2.72098 2.5567 1" material="" geometry="" rotation="0.03781521447863433 -1.4501561794761135 -1.2501939089754561"></a-image>
     </a-entity>
 
-<a-entity position="-0.25 -0.8 -4" visible=""  class="venue-entity">
+<a-entity 
+class="flex-entity venue-entity"
+position="-0.25 -0.8 -4" visible=""  class="venue-entity">
 <a-image src="#venue-wall-01" material="" geometry="" visible="" position="9.5 1.4 2.9" rotation="-3.059021668203465 -91.90873287473048 -1.724030005548647" scale="3 3 2.3"></a-image>   
  </a-entity>
 
@@ -159,7 +128,7 @@
 
       <!-- museum -->
       <a-entity
-        class="city-entity"
+        class="city-entity flex-entity"
         id="museum"
         layout="margin: 0"
         position="-1 0.25 -9"
@@ -183,6 +152,8 @@
 
       <!-- venue -->
       <a-entity
+              class="city-entity flex-entity"
+
         id="venue"
         layout="margin: 0"
         position="-3.9 -1.5 -3.4"
@@ -257,7 +228,7 @@
 
 
             <!-- back to the city -->
-<a-entity   class="venue-entity" id="back-to-the-city" layout="margin: 0; angle: NaN; columns: 2" position="4.44913 1.53962 6.41826" visible="" rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" scale="1.5 1.5 1">
+<a-entity   class="venue-entity flex-entity" id="back-to-the-city" layout="margin: 0; angle: NaN; columns: 2" position="4.44913 1.53962 6.41826" visible="" rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" scale="1.5 1.5 1">
         <a-plane color="#000" height="0.75" width="2" position="" material="" geometry="" rotation=""></a-plane>
         <a-entity text="value: Back to the city; color: #fff; align: center; width: 3" position="" layout="margin: 10; angle: NaN; columns: 0" width="5"></a-entity>
       </a-entity>
