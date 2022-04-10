@@ -188,7 +188,7 @@
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
-        togglescenes="show:venue-assets"
+        togglescenes="show:city-entity;hide:flex-entity"
         
       >
 
@@ -227,7 +227,7 @@
 
       <!-- gallery -->
       <a-entity
-        class="city-entity"
+        class="city-entity flex-entity"
         id="gallery"
         layout="margin: 0"
         position="-1.12 -1.48 7.244"
@@ -312,16 +312,19 @@
     </a-scene>
   </body>
   <script>
-AFRAME.registerComponent('togglescenes', {
+      AFRAME.registerComponent('togglescenes', {
         schema: {
           show: {default:'default'}
         },        
         init: function () {
           var data = this.data;
-          var el = this.el;        
-          el.addEventListener('click', function () {            
-           console.log(data.show);
-          });        
+          var el = this.el; 
+          var classToShow = document.getElementsByClassName(data.show);
+            el.addEventListener('click', function () {
+            for (var i=0; i < classToShow.length; i++) {
+            classToShow[i].setAttribute("visible", false);
+            }
+         });        
         }
       });
 
