@@ -121,6 +121,30 @@
         />
       </a-assets>
 
+
+      <!-- venue walls. -->
+      <img
+          id="venue-wall-01"
+          crossorigin="anonymous"
+          src="https://lh3.googleusercontent.com/oEHKzENSwJvSnkx2ohs4YCeZQWsZo8aH06_zxMnKpZVY8M3OFJycGOcucix0Ft_8S7bOfHIzv5tHZqR4i0pR_TRpwKw4hVU7pFVx=s0"
+          />
+      </a-assets>
+
+        <img
+      id="venue-wall-02"
+      crossorigin="anonymous"
+      src="https://lh3.googleusercontent.com/Ic0AIMJ6jIUbqNvvDo_dBFuXfgAgnovTpvV0mP5lTOHWdNzw-hSeRIFBAhlL5TH27ex7aJuxJUt52vkfXPNAevRKJsKatquYfsyO6A=s0"
+      />
+     </a-assets>
+
+<a-entity position="1.82414 0.49782 -8" rotation="-6.339778003122559 2.868226722424901 0.12948846169956604" class="venue-entity">
+    <a-image src="#venue-wall-02" scale="2.72098 2.5567 1" material="" geometry="" rotation="0.03781521447863433 -1.4501561794761135 -1.2501939089754561"></a-image>
+    </a-entity>
+
+<a-entity position="-0.25 -0.8 -4" visible=""  class="venue-entity">
+<a-image src="#venue-wall-01" material="" geometry="" visible="" position="9.5 1.4 2.9" rotation="-3.059021668203465 -91.90873287473048 -1.724030005548647" scale="3 3 2.3"></a-image>   
+ </a-entity>
+
       <!-- 360-degree image. -->
       <a-sky
         id="image-360"
@@ -135,6 +159,7 @@
 
       <!-- museum -->
       <a-entity
+        class="city-entity"
         id="museum"
         layout="margin: 0"
         position="-1 0.25 -9"
@@ -163,6 +188,7 @@
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
+        togglescenes="show:venue-assets"
         
       >
 
@@ -176,13 +202,15 @@
                   data-src="#360venue02"
                    event-set__mouseenter="scale: 1.2 1.2 1"
         event-set__mouseleave="scale: 1 1 1"
-                event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01"
+                event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
 
            proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
                
 
         ></a-plane>
+
+
         <a-entity
           text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
           position="0 0 0"
@@ -199,6 +227,7 @@
 
       <!-- gallery -->
       <a-entity
+        class="city-entity"
         id="gallery"
         layout="margin: 0"
         position="-1.12 -1.48 7.244"
@@ -226,6 +255,13 @@
         ></a-entity>
       </a-entity>
 
+
+            <!-- back to the city -->
+<a-entity   class="venue-entity" id="back-to-the-city" layout="margin: 0; angle: NaN; columns: 2" position="4.44913 1.53962 6.41826" visible="" rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" scale="1.5 1.5 1">
+        <a-plane color="#000" height="0.75" width="2" position="" material="" geometry="" rotation=""></a-plane>
+        <a-entity text="value: Back to the city; color: #fff; align: center; width: 3" position="" layout="margin: 10; angle: NaN; columns: 0" width="5"></a-entity>
+      </a-entity>
+
       <!-- camile -->
       <a-entity position="-.25 .8 -4">
         <a-plane
@@ -249,6 +285,12 @@
         </a-entity>
       </a-entity>
 
+
+
+
+
+
+
       <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
@@ -270,6 +312,19 @@
     </a-scene>
   </body>
   <script>
+AFRAME.registerComponent('togglescenes', {
+        schema: {
+          show: {default:'default'}
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;        
+          el.addEventListener('click', function () {            
+           console.log(data.show);
+          });        
+        }
+      });
+
     /* var camera_rig = document.querySelector('#camera-rig');
       camera_rig.setAttribute('position', 'x', 0);
       camera_rig.setAttribute('position', 'y', 2);
