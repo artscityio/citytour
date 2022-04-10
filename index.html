@@ -80,6 +80,21 @@
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"
         />
         <img
+          id="360venue01"
+          crossorigin="anonymous"
+          src="https://res.cloudinary.com/artscity-io/image/upload/v1649111148/spaces_du0swv.jpg"
+        />
+        <img
+          id="360venue02"
+          crossorigin="anonymous"
+          src="https://res.cloudinary.com/artscity-io/image/upload/v1649111116/apartment_td4nsl.jpg"
+        />
+        <img
+          id="360museum01"
+          crossorigin="anonymous"
+          src="https://res.cloudinary.com/artscity-io/image/upload/v1649111760/Equirectangular_bild_format_dxwf9x.jpg"
+        />
+        <img
           id="sechelt"
           crossorigin="anonymous"
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
@@ -158,10 +173,10 @@
           width="1.5"
           position="10 0 -10"
         class="portal"
-                  data-src="#cubes"
+                  data-src="#360venue02"
                    event-set__mouseenter="scale: 1.2 1.2 1"
         event-set__mouseleave="scale: 1 1 1"
-                event-set__click="_target: #image-360; _delay: 300; material.src: #cubes"
+                event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01"
 
            proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
