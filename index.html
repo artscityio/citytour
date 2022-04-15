@@ -38,12 +38,17 @@
       >      </a-entity>
     </script>
 
-
-
+    
+    <script id="externalLink" type="text/html">
+      <a-entity class="externalLink venue-entity"
+        event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+        proxy-event="event: click; to: #image-360; as: fade"
+      >      </a-entity>
+    </script>
 
     <script>
       //var datetime = new Date().toLocaleTimeString();
-      document.title = "Arts City";
+      document.title = "Welcome to ArtsCity";
     </script>
   </head>
   <body>
@@ -95,26 +100,58 @@
           />
       </a-assets>
 
-        <img
-      id="venue-wall-02"
-      crossorigin="anonymous"
-      src="https://lh3.googleusercontent.com/Ic0AIMJ6jIUbqNvvDo_dBFuXfgAgnovTpvV0mP5lTOHWdNzw-hSeRIFBAhlL5TH27ex7aJuxJUt52vkfXPNAevRKJsKatquYfsyO6A=s0"
+      <img
+        id="venue-wall-02"
+        crossorigin="anonymous"
+        src="https://lh3.googleusercontent.com/Ic0AIMJ6jIUbqNvvDo_dBFuXfgAgnovTpvV0mP5lTOHWdNzw-hSeRIFBAhlL5TH27ex7aJuxJUt52vkfXPNAevRKJsKatquYfsyO6A=s0"
       />
      </a-assets>
+        
+  <!--external links-->  
 
-<a-entity 
-          class="flex-entity venue-entity"
-          position="1.82414 0.49782 -8" rotation="-6.339778003122559 2.868226722424901 0.12948846169956604" class="venue-entity">
-    <a-image src="#venue-wall-02" scale="2.72098 2.5567 1" material="" geometry="" rotation="0.03781521447863433 -1.4501561794761135 -1.2501939089754561"></a-image>
-    </a-entity>
+  <!--venue wall 01 (closer to the window)-->   
+  <a-entity 
+    class="flex-entity venue-entity"
+    visible="false"
+    position="-0.25 -0.8 -4">
+    <a-image 
+      src="#venue-wall-01"  
+      position="9.22624 1.1 1.77127" 
+      rotation="-3.15 -75.50149942275425 1.61"
+      scale="3 3 1"
+      class="externalLink venue-entity flex-entity "
+      event-set__mouseenter="scale: 4.0 4.0 1"
+      event-set__mouseleave="scale: 3 3 1"
+      nftinfo="marketplace:OpenSea;price:listed for 0.1 ETH;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/0x2d097c1535988216499722df726617a3607b0f08/1048?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
 
-<a-entity 
-class="flex-entity venue-entity"
-position="-0.25 -0.8 -4" visible=""  class="venue-entity">
-<a-image src="#venue-wall-01" material="" geometry="" visible="" position="9.5 1.4 2.9" rotation="-3.059021668203465 -91.90873287473048 -1.724030005548647" scale="3 3 2.3"></a-image>   
- </a-entity>
 
-      <!-- 360-degree image. -->
+      >
+    </a-image>   
+  </a-entity>
+
+  <!--venue wall 02-->   
+  <a-entity 
+    class="flex-entity venue-entity"
+    visible="false"
+    position="1.82414 0.49782 -8" 
+    rotation="-6.339778003122559 2.868226722424901 0.12948846169956604" 
+    class="venue-entity"
+  >
+    <a-image 
+      src="#venue-wall-02" 
+      scale="2.72098 2.5567 1" 
+      rotation="0.03781521447863433 -1.4501561794761135 -1.2501939089754561"
+      class="externalLink venue-entity flex-entity "
+      event-set__mouseenter="scale: 4.0 4.0 1"
+      event-set__mouseleave="scale: 3 3 1"
+      nftinfo="marketplace:OpenSea;price:not listed;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/matic/0x734ad92b06967533cdb8893db60266c527919022/109?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
+
+    >
+    </a-image>
+  </a-entity>
+
+
+      <!-- sky. -->
       <a-sky
         id="image-360"
         radius="10"
@@ -126,7 +163,7 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
 
 
 
-      <!-- museum -->
+      <!-- museum banner-->
       <a-entity
         class="city-entity flex-entity"
         id="museum"
@@ -150,37 +187,35 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
         ></a-entity>
       </a-entity>
 
-      <!-- venue -->
+      <!-- venue banner -->
       <a-entity
-              class="city-entity flex-entity"
+              class="city-entity flex-entity clickable"
 
         id="venue"
         layout="margin: 0"
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
-        togglescenes="show:city-entity;hide:flex-entity"
+        togglescenes="show:venue-entity;hide:flex-entity"
         
       >
 
       
         <a-plane
-          color="#000"
-          height="0.75"
-          width="1.5"
-          position="10 0 -10"
-        class="portal"
-                  data-src="#360venue02"
-                   event-set__mouseenter="scale: 1.2 1.2 1"
+        color="#000"
+        height="0.75"
+        width="1.5"
+        position="10 0 -10"
+        class="portal clickable city-entity flex-entity "
+        data-src="#360venue02"
+        event-set__mouseenter="scale: 1.2 1.2 1"
         event-set__mouseleave="scale: 1 1 1"
-                event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
-
-           proxy-event="event: click; to: #image-360; as: fade"
+        event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
+        proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
-               
+              
 
         ></a-plane>
-
 
         <a-entity
           text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
@@ -188,15 +223,10 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
           layout="margin: 10"
           width="4"
         ></a-entity>
- 
 
-        
       </a-entity>
 
-
-
-
-      <!-- gallery -->
+      <!-- gallery banner-->
       <a-entity
         class="city-entity flex-entity"
         id="gallery"
@@ -219,22 +249,43 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
         ></a-entity>
       </a-entity>
 
-        <a-entity
-          template="src: #link"
-          data-src="#city"
-          data-thumb="#city-thumb"
-        ></a-entity>
+
       </a-entity>
 
 
-            <!-- back to the city -->
-<a-entity   class="venue-entity flex-entity" id="back-to-the-city" layout="margin: 0; angle: NaN; columns: 2" position="4.44913 1.53962 6.41826" visible="" rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" scale="1.5 1.5 1">
-        <a-plane color="#000" height="0.75" width="2" position="" material="" geometry="" rotation=""></a-plane>
-        <a-entity text="value: Back to the city; color: #fff; align: center; width: 3" position="" layout="margin: 10; angle: NaN; columns: 0" width="5"></a-entity>
+      <!-- back to the city banner -->
+      <a-entity class="venue-entity flex-entity"           
+                togglescenes="show:city-entity;hide:flex-entity"
+                id="back-to-the-city"
+                layout="margin: 0; angle: NaN; columns: 2" 
+                position="4.87125 2.26612 6.41826" 
+                visible="" 
+                rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" 
+                scale="1.5 1.5 1">
+        <a-plane 
+                  class="flex-entity venue-entity"
+                  data-src="#artscity"
+                  event-set__mouseenter="scale: 1.2 1.2 1"
+                  event-set__mouseleave="scale: 1 1 1"
+                  event-set__click="_target: #image-360; _delay: 300; material.src: #artscity;"
+                  proxy-event="event: click; to: #image-360; as: fade"
+                  sound="on: click; src: #click-sound"
+                  color="#000" height="0.75" width="2" position="" material="" geometry="" rotation="">
+        </a-plane>
+        <a-entity 
+          text="value: Back to the city; color: #fff; align: center; width: 3" 
+          position="" 
+          layout="margin: 10; angle: NaN; columns: 0" 
+          width="5"
+        >
+        </a-entity>
       </a-entity>
 
-      <!-- camile -->
-      <a-entity position="-.25 .8 -4">
+
+      <!-- camile chat city-->
+      <a-entity position="-.25 .8 -4"
+      class="city-entity flex-entity"
+      id="camile-chat-city">
         <a-plane
           color="#CCC"
           height="0.75"
@@ -243,7 +294,7 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
         ></a-plane>
         <a-entity
           template="src: #link"
-          data-src="#sechelt"
+          data-src="#artscity"
           data-thumb="#camile"
           scale="0.5 0.5"
           position="-.65 0 2.6"
@@ -256,12 +307,6 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
         </a-entity>
       </a-entity>
 
-
-
-
-
-
-
       <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
@@ -269,15 +314,30 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
       >
         
         <a-entity camera look-controls>
+                      <!--raycaster=objects: .portal, .externalLink-->            
+
           <a-cursor
             id="cursor"
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
             animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
             event-set__mouseenter="_event: mouseenter; color: springgreen"
             event-set__mouseleave="_event: mouseleave; color: black"
-            raycaster="objects: .link, .portal, .chat"
+            raycaster="objects: .externalLink,.clickable"
+
           ></a-cursor>
-          
+           <!-- camile click the image-->
+      <a-entity 
+        position="-0.21436 -.8 -4"     
+        class="flex-entity venue-entity"
+        id="camile-click-the-image" 
+        visible="false"
+>
+        <a-plane color="#CCC" height="0.65" width="2.5" position="0.25 0 2.5" material="" geometry=""></a-plane>
+        <a-entity template="src: #link" data-src="#360venue02" data-thumb="#camile" scale="0.5 0.5 1" position="-0.65 0.05 2.6">
+        <a-entity class="link" geometry="primitive: plane" material="shader: flat; src: [object HTMLImageElement]" event-set__mouseenter="[object Object]" event-set__mouseleave="[object Object]" event-set__click="[object Object]" proxy-event="event: click; to: #image-360; as: fade" sound="on: click; src: https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg">      </a-entity></a-entity>
+        <a-entity id="chat-text" text="value: I use my apartment to showcase NFTs from my collection. Do you like it?; color: #000" position="0.45 0.015 2.6" scale="1.5 1.5 1.5">
+        </a-entity>
+      </a-entity>
         </a-entity>
       </a-entity>
     </a-scene>
@@ -285,38 +345,80 @@ position="-0.25 -0.8 -4" visible=""  class="venue-entity">
   <script>
       AFRAME.registerComponent('togglescenes', {
         schema: {
-          show: {default:'default'}
+          show: {default:'default'},
+          hide: {default:'default'}
         },        
         init: function () {
           var data = this.data;
           var el = this.el; 
           var classToShow = document.getElementsByClassName(data.show);
-            el.addEventListener('click', function () {
-            for (var i=0; i < classToShow.length; i++) {
-            classToShow[i].setAttribute("visible", false);
+          var classToHide = document.getElementsByClassName(data.hide);
+
+           el.addEventListener('click', function () {
+            for (var i=0; i < classToHide.length; i++) {
+            classToHide[i].setAttribute("visible", false);
+            classToHide[i].classList.remove("clickable");
+         
             }
-         });        
+            for (var i=0; i < classToShow.length; i++) {
+            classToShow[i].setAttribute("visible", true);
+            classToShow[i].classList.add("clickable");
+
+            }
+      
+          });        
+         
         }
       });
 
-    /* var camera_rig = document.querySelector('#camera-rig');
-      camera_rig.setAttribute('position', 'x', 0);
-      camera_rig.setAttribute('position', 'y', 2);
-      camera_rig.setAttribute('position', 'z', 4);*/
+      AFRAME.registerComponent('nftinfo', {
+        schema: {
+          price: {default:'default'},
+          marketplace: {default:'default'},
+          eltotoggle:{default:'default'},
+          url:{default:'default'},
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+          var eltotoggle = document.getElementById(data.eltotoggle);
+          var texttotoggle = document.getElementById(data.texttotoggle);
+          var text = 'value: This digital asset is ';
+          text += data.price + '.';
+          text +='You can see it on '
+          text += data.marketplace+' by clicking the image.';
+
+           el.addEventListener('mouseenter', function () {
+              eltotoggle.setAttribute("visible", false);
+              texttotoggle.setAttribute("text", text);
+              eltotoggle.setAttribute("visible", true);
+         });   
+         
+          el.addEventListener('mouseleave', function () {
+             eltotoggle.setAttribute("visible", false);
+
+         });   
+
+             el.addEventListener('click', function () {
+             window.open(data.url, '_blank');
+         });         
+        
+        }
+      });
 
     AFRAME.registerComponent("scenelistener", {
       init: function () {
         let vrcam = document.querySelector("#cam-vr");
         let dcam = document.querySelector("#cam-desktop");
         let cursor = document.querySelector("[cursor]");
-        console.clear(); /*from   ww  w.de mo  2  s .c  o m*/
-        console.log("init");
-        console.log("vrcam:");
-        console.log(vrcam);
-        console.log("dcam:");
-        console.log(dcam);
-        console.log("cursor:");
-        console.log(cursor);
+        //console.clear(); /*from   ww  w.de mo  2  s .c  o m*/
+        //console.log("init");
+        //console.log("vrcam:");
+        //console.log(vrcam);
+        //console.log("dcam:");
+        //console.log(dcam);
+        //console.log("cursor:");
+        //console.log(cursor);
         this.el.sceneEl.addEventListener("enter-vr", function () {
           cursor.setAttribute("visible", true);
           dcam.setAttribute("camera", "active", false);
