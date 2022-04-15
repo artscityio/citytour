@@ -124,6 +124,8 @@
       class="externalLink"
       event-set__mouseenter="scale: 4.0 4.0 1"
       event-set__mouseleave="scale: 3 3 1"
+      nftinfo="marketplace:OpenSea;price:listed for 0.1 ETH;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/0x2d097c1535988216499722df726617a3607b0f08/1048?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
+
 
       >
     </a-image>   
@@ -337,6 +339,7 @@
         </a-entity>
       </a-entity>
 
+     
 
 
 
@@ -357,7 +360,15 @@
             event-set__mouseleave="_event: mouseleave; color: black"
             raycaster="objects: .portal, .externalLink"
           ></a-cursor>
-          
+           <!-- camile click the image-->
+      <a-entity position="-0.21436 -.8 -4" class="hover-entity" id="camile-click-the-image" visible="false"
+>
+        <a-plane color="#CCC" height="0.65" width="2.5" position="0.25 0 2.5" material="" geometry=""></a-plane>
+        <a-entity template="src: #link" data-src="#360venue02" data-thumb="#camile" scale="0.5 0.5 1" position="-0.65 0.05 2.6">
+        <a-entity class="link" geometry="primitive: plane" material="shader: flat; src: [object HTMLImageElement]" event-set__mouseenter="[object Object]" event-set__mouseleave="[object Object]" event-set__click="[object Object]" proxy-event="event: click; to: #image-360; as: fade" sound="on: click; src: https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg">      </a-entity></a-entity>
+        <a-entity id="chat-text" text="value: Click the NFT to see it on the Marketplace.; color: #000" position="0.45 0.015 2.6" scale="1.5 1.5 1.5">
+        </a-entity>
+      </a-entity>
         </a-entity>
       </a-entity>
     </a-scene>
@@ -389,6 +400,52 @@
         }
       });
 
+      AFRAME.registerComponent('nftinfo', {
+        schema: {
+          price: {default:'default'},
+          marketplace: {default:'default'},
+          eltotoggle:{default:'default'},
+          url:{default:'default'},
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+          var eltotoggle = document.getElementById(data.eltotoggle);
+          var texttotoggle = document.getElementById(data.texttotoggle);
+          var text = 'value: This digital asset is';
+          text += data.price + '.';
+          text +='Click on the image to see it on '
+          text += data.marketplace+'.';
+          //var price = document.getElementsByClassName(data.price);
+          //var marketPLace = document.getElementsByClassName(data.marketPLace);
+
+           el.addEventListener('mouseenter', function () {
+             console.log('mouseenter');
+            //for (var i=0; i < classToHide.length; i++) {
+              texttotoggle.setAttribute("text", text);
+              eltotoggle.setAttribute("visible", true);
+            //}
+         });   
+         
+          el.addEventListener('mouseleave', function () {
+             console.log('mouseleave');
+             eltotoggle.setAttribute("visible", false);
+
+            //for (var i=0; i < classToHide.length; i++) {
+            //classToHide[i].setAttribute("visible", false);
+            //}
+         });   
+
+             el.addEventListener('click', function () {
+             console.log('click');
+             window.open(data.url, '_blank');
+            //for (var i=0; i < classToHide.length; i++) {
+            //classToHide[i].setAttribute("visible", false);
+            //}
+         });         
+        
+        }
+      });
     /* var camera_rig = document.querySelector('#camera-rig');
       camera_rig.setAttribute('position', 'x', 0);
       camera_rig.setAttribute('position', 'y', 2);
