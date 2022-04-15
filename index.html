@@ -40,15 +40,11 @@
 
     
     <script id="externalLink" type="text/html">
-      <a-entity class="externalLink"
+      <a-entity class="externalLink venue-entity"
         event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
         proxy-event="event: click; to: #image-360; as: fade"
       >      </a-entity>
     </script>
-
-    
-
-
 
     <script>
       //var datetime = new Date().toLocaleTimeString();
@@ -123,7 +119,7 @@
       position="9.22624 1.1 1.77127" 
       rotation="-3.15 -75.50149942275425 1.61"
       scale="3 3 1"
-      class="externalLink"
+      class="externalLink venue-entity flex-entity "
       event-set__mouseenter="scale: 4.0 4.0 1"
       event-set__mouseleave="scale: 3 3 1"
       nftinfo="marketplace:OpenSea;price:listed for 0.1 ETH;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/0x2d097c1535988216499722df726617a3607b0f08/1048?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
@@ -145,7 +141,7 @@
       src="#venue-wall-02" 
       scale="2.72098 2.5567 1" 
       rotation="0.03781521447863433 -1.4501561794761135 -1.2501939089754561"
-      class="externalLink"
+      class="externalLink venue-entity flex-entity "
       event-set__mouseenter="scale: 4.0 4.0 1"
       event-set__mouseleave="scale: 3 3 1"
       nftinfo="marketplace:OpenSea;price:not listed;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/matic/0x734ad92b06967533cdb8893db60266c527919022/109?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
@@ -206,22 +202,20 @@
 
       
         <a-plane
-          color="#000"
-          height="0.75"
-          width="1.5"
-          position="10 0 -10"
-        class="portal"
-                  data-src="#360venue02"
-                   event-set__mouseenter="scale: 1.2 1.2 1"
+        color="#000"
+        height="0.75"
+        width="1.5"
+        position="10 0 -10"
+        class="portal clickable city-entity flex-entity "
+        data-src="#360venue02"
+        event-set__mouseenter="scale: 1.2 1.2 1"
         event-set__mouseleave="scale: 1 1 1"
-                event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
-
-           proxy-event="event: click; to: #image-360; as: fade"
+        event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
+        proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
-               
+              
 
         ></a-plane>
-
 
         <a-entity
           text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
@@ -229,13 +223,8 @@
           layout="margin: 10"
           width="4"
         ></a-entity>
- 
 
-        
       </a-entity>
-
-
-
 
       <!-- gallery banner-->
       <a-entity
@@ -274,7 +263,7 @@
                 rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" 
                 scale="1.5 1.5 1">
         <a-plane 
-                  class="portal"
+                  class="flex-entity venue-entity"
                   data-src="#artscity"
                   event-set__mouseenter="scale: 1.2 1.2 1"
                   event-set__mouseleave="scale: 1 1 1"
@@ -318,40 +307,6 @@
         </a-entity>
       </a-entity>
 
-      
-      <!-- camile chat venue>
-      <a-entity-- position="-.25 .8 -4"
-      class="venue-entity flex-entity"
-      id="camile-chat-venue"
-      visible="false"
->
-        <a-plane
-          color="#CCC"
-          height="0.75"
-          width="2.5"
-          position=".25 0 2.5"
-        ></a-plane>
-        <a-entity
-          template="src: #link"
-          data-src="#360venue02"
-          data-thumb="#camile"
-          scale="0.5 0.5"
-          position="-.65 0 2.6"
-        ></a-entity>
-        <a-entity
-          text="value: I use my apartment to showcase NFTs from my collection. Do you like it?; color: #000"
-          position=".45 .015 2.6"
-          scale="1.5 1.5 1.5"
-        >
-        </a-entity>
-      </a-entity-->
-
-     
-
-
-
-
-
       <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
@@ -367,7 +322,7 @@
             animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
             event-set__mouseenter="_event: mouseenter; color: springgreen"
             event-set__mouseleave="_event: mouseleave; color: black"
-            raycaster="objects:  .portal, .externalLink,.clickable"
+            raycaster="objects: .externalLink,.clickable"
 
           ></a-cursor>
            <!-- camile click the image-->
@@ -403,15 +358,16 @@
             for (var i=0; i < classToHide.length; i++) {
             classToHide[i].setAttribute("visible", false);
             classToHide[i].classList.remove("clickable");
-            
+         
             }
             for (var i=0; i < classToShow.length; i++) {
             classToShow[i].setAttribute("visible", true);
             classToShow[i].classList.add("clickable");
 
             }
-         });        
-        
+      
+          });        
+         
         }
       });
 
@@ -431,55 +387,38 @@
           text += data.price + '.';
           text +='You can see it on '
           text += data.marketplace+' by clicking the image.';
-          //var price = document.getElementsByClassName(data.price);
-          //var marketPLace = document.getElementsByClassName(data.marketPLace);
 
            el.addEventListener('mouseenter', function () {
-             console.log('mouseenter');
-            //for (var i=0; i < classToHide.length; i++) {
               eltotoggle.setAttribute("visible", false);
               texttotoggle.setAttribute("text", text);
               eltotoggle.setAttribute("visible", true);
-            //}
          });   
          
           el.addEventListener('mouseleave', function () {
-             console.log('mouseleave');
              eltotoggle.setAttribute("visible", false);
 
-            //for (var i=0; i < classToHide.length; i++) {
-            //classToHide[i].setAttribute("visible", false);
-            //}
          });   
 
              el.addEventListener('click', function () {
-             console.log('click');
              window.open(data.url, '_blank');
-            //for (var i=0; i < classToHide.length; i++) {
-            //classToHide[i].setAttribute("visible", false);
-            //}
          });         
         
         }
       });
-    /* var camera_rig = document.querySelector('#camera-rig');
-      camera_rig.setAttribute('position', 'x', 0);
-      camera_rig.setAttribute('position', 'y', 2);
-      camera_rig.setAttribute('position', 'z', 4);*/
 
     AFRAME.registerComponent("scenelistener", {
       init: function () {
         let vrcam = document.querySelector("#cam-vr");
         let dcam = document.querySelector("#cam-desktop");
         let cursor = document.querySelector("[cursor]");
-        console.clear(); /*from   ww  w.de mo  2  s .c  o m*/
-        console.log("init");
-        console.log("vrcam:");
-        console.log(vrcam);
-        console.log("dcam:");
-        console.log(dcam);
-        console.log("cursor:");
-        console.log(cursor);
+        //console.clear(); /*from   ww  w.de mo  2  s .c  o m*/
+        //console.log("init");
+        //console.log("vrcam:");
+        //console.log(vrcam);
+        //console.log("dcam:");
+        //console.log(dcam);
+        //console.log("cursor:");
+        //console.log(cursor);
         this.el.sceneEl.addEventListener("enter-vr", function () {
           cursor.setAttribute("visible", true);
           dcam.setAttribute("camera", "active", false);
