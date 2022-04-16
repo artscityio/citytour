@@ -119,10 +119,10 @@
       position="9.22624 1.1 1.77127" 
       rotation="-3.15 -75.50149942275425 1.61"
       scale="3 3 1"
-      class="externalLink venue-entity flex-entity "
+      class="externalLink venue-entity flex-entity"
       event-set__mouseenter="scale: 4.0 4.0 1"
       event-set__mouseleave="scale: 3 3 1"
-      nftinfo="marketplace:OpenSea;price:listed for 0.1 ETH;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/0x2d097c1535988216499722df726617a3607b0f08/1048?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
+      nftinfo="title:Bear #1048;marketplace:OpenSea;price:listed for 0.1 ETH;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/0x2d097c1535988216499722df726617a3607b0f08/1048?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
 
 
       >
@@ -144,7 +144,7 @@
       class="externalLink venue-entity flex-entity "
       event-set__mouseenter="scale: 4.0 4.0 1"
       event-set__mouseleave="scale: 3 3 1"
-      nftinfo="marketplace:OpenSea;price:not listed;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/matic/0x734ad92b06967533cdb8893db60266c527919022/109?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
+      nftinfo="title:Baby Apepunk Club #109;marketplace:OpenSea;price:not listed;eltotoggle:camile-click-the-image;texttotoggle:chat-text;url:https://opensea.io/assets/matic/0x734ad92b06967533cdb8893db60266c527919022/109?ref=0x7c931021D05bD679139c9Ce35A3BD17E669f100d"
 
     >
     </a-image>
@@ -321,8 +321,10 @@
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
             animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
             event-set__mouseenter="_event: mouseenter; color: springgreen"
-            event-set__mouseleave="_event: mouseleave; color: black"
-            raycaster="objects: .externalLink,.clickable"
+            event-set__mouseleave="_event: mouseleave; color: orange"
+            material="color: orange; shader: flat"
+            raycaster="objects: .clickable"
+            geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.0375;"
 
           ></a-cursor>
            <!-- camile click the image-->
@@ -335,7 +337,7 @@
         <a-plane color="#CCC" height="0.65" width="2.5" position="0.25 0 2.5" material="" geometry=""></a-plane>
         <a-entity template="src: #link" data-src="#360venue02" data-thumb="#camile" scale="0.5 0.5 1" position="-0.65 0.05 2.6">
         <a-entity class="link" geometry="primitive: plane" material="shader: flat; src: [object HTMLImageElement]" event-set__mouseenter="[object Object]" event-set__mouseleave="[object Object]" event-set__click="[object Object]" proxy-event="event: click; to: #image-360; as: fade" sound="on: click; src: https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg">      </a-entity></a-entity>
-        <a-entity id="chat-text" text="value: I use my apartment to showcase NFTs from my collection. Do you like it?; color: #000" position="0.45 0.015 2.6" scale="1.5 1.5 1.5">
+        <a-entity id="chat-text" text="value: I use my apartment to showcase NFTs from my collection. Do you like it?; color: #000" position="0.45 0.130 2.6" scale="1.5 1.5 1.5">
         </a-entity>
       </a-entity>
         </a-entity>
@@ -377,13 +379,14 @@
           marketplace: {default:'default'},
           eltotoggle:{default:'default'},
           url:{default:'default'},
+          title:{default:'default'},
         },        
         init: function () {
           var data = this.data;
           var el = this.el;
           var eltotoggle = document.getElementById(data.eltotoggle);
           var texttotoggle = document.getElementById(data.texttotoggle);
-          var text = 'value: This digital asset is ';
+          var text = 'value: '+data.title+ ': this digital asset is ';
           text += data.price + '.';
           text +='You can see it on '
           text += data.marketplace+' by clicking the image.';
