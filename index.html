@@ -180,7 +180,7 @@
           position="10 0 -10"
         ></a-plane>
         <a-entity
-          text="value: The CryptoArt Museum; color: #fff; align: center; width:3; vertical-align: top;"
+          text="value: The CryptoArt Museum; color: #fff; align: center; width:3;"
           position="5 0.0 5"
           layout="margin: 10"
           width="5"
@@ -197,7 +197,7 @@
         visible="true"
         rotation="0 65 0"
         togglescenes="show:venue-entity;hide:flex-entity"
-        
+        chatinfo="text:I use my apartment to showcase NFTs from my collection. Just click on the black tag to take a look.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
       >
 
       
@@ -218,7 +218,7 @@
         ></a-plane>
 
         <a-entity
-          text="value: Camile's Venue; color: #fff; align: center; width:3; vertical-align: top;"
+          text="value: Camile's Venue; color: #fff; align: center; width:3;"
           position="0 0 0"
           layout="margin: 10"
           width="4"
@@ -242,7 +242,7 @@
           position="10 0 -10"
         ></a-plane>
         <a-entity
-          text="value: Metamodern Art Gallery; color: #fff; align: center; width:4; vertical-align: top;"
+          text="value: Metamodern Art Gallery; color: #fff; align: center; width:4;"
           position="5 0.0 5"
           layout="margin: 10"
           width="6"
@@ -285,7 +285,8 @@
       <!-- camile chat city-->
       <a-entity position="-.25 .8 -4"
       class="city-entity flex-entity"
-      id="camile-chat-city">
+      id="camile-chat-city"
+      visible="false">
         <a-plane
           color="#CCC"
           height="0.75"
@@ -332,12 +333,12 @@
         position="-0.21436 -.8 -4"     
         class="flex-entity venue-entity"
         id="camile-click-the-image" 
-        visible="false"
+        visible="true"
 >
         <a-plane color="#CCC" height="0.65" width="2.5" position="0.25 0 2.5" material="" geometry=""></a-plane>
         <a-entity template="src: #link" data-src="#360venue02" data-thumb="#camile" scale="0.5 0.5 1" position="-0.65 0.05 2.6">
         <a-entity class="link" geometry="primitive: plane" material="shader: flat; src: [object HTMLImageElement]" event-set__mouseenter="[object Object]" event-set__mouseleave="[object Object]" event-set__click="[object Object]" proxy-event="event: click; to: #image-360; as: fade" sound="on: click; src: https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg">      </a-entity></a-entity>
-        <a-entity id="chat-text" text="value: I use my apartment to showcase NFTs from my collection. Do you like it?; color: #000" position="0.45 0.130 2.6" scale="1.5 1.5 1.5">
+        <a-entity id="chat-text" text="value:Hello, welcome to ArtsCity - The Arts' Metaverse. My name is Camile, and I am your host today.  Hover the black tags with the ring pointer to get more info, and click them to enter the places. Please feel free to walk around.; color: #000" position="0.45 0.130 2.6" scale="1.5 1.5 1.5">
         </a-entity>
       </a-entity>
         </a-entity>
@@ -379,6 +380,7 @@
           marketplace: {default:'default'},
           eltotoggle:{default:'default'},
           url:{default:'default'},
+          texttotoggle:{default:'default'},
           title:{default:'default'},
         },        
         init: function () {
@@ -408,7 +410,32 @@
         
         }
       });
+ AFRAME.registerComponent('chatinfo', {
+        schema: {
+          text: {default:'default'},
+          eltotoggle:{default:'default'},
+          texttotoggle:{default:'default'},
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+          var eltotoggle = document.getElementById(data.eltotoggle);
+          var texttotoggle = document.getElementById(data.texttotoggle);
+          var text = 'value: '+data.text;
 
+           el.addEventListener('mouseenter', function () {
+              eltotoggle.setAttribute("visible", false);
+              texttotoggle.setAttribute("text", text);
+              eltotoggle.setAttribute("visible", true);
+         });   
+         
+          el.addEventListener('mouseleave', function () {
+             eltotoggle.setAttribute("visible", false);
+
+         });   
+                  
+        }
+      });
     AFRAME.registerComponent("scenelistener", {
       init: function () {
         let vrcam = document.querySelector("#cam-vr");
