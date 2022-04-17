@@ -52,7 +52,11 @@
     </script>
   </head>
   <body>
-    <a-scene>
+    <a-scene 
+    start="eltotoggle:camile-click-the-image;texttotoggle:chat-text;delay:3500;
+    text:Hello, welcome to ArtsCity - The Arts' Metaverse. My name is Camile, and I am your host today.;
+    mousemovetext:Place the ring pointer over a black tag to get more info.;"
+>
       <a-assets>
         <audio
           id="click-sound"
@@ -197,7 +201,7 @@
         visible="true"
         rotation="0 65 0"
         togglescenes="show:venue-entity;hide:flex-entity"
-        chatinfo="text:I use my apartment to showcase NFTs from my collection. Just click on the black tag to take a look.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
+        chatinfo="text:I use my apartment to showcase NFTs from my wallet. Just click on the black tag to take a look.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
       >
 
       
@@ -314,7 +318,7 @@
         animation="property: position; from: 0 8 0; to: 0 0.0 0;  dur: 6001; easing: linear; loop: false"
       >
         
-        <a-entity camera look-controls>
+        <a-entity id="camera" camera look-controls  position-listener rotation-listener>
                       <!--raycaster=objects: .portal, .externalLink-->            
 
           <a-cursor
@@ -333,7 +337,7 @@
         position="-0.21436 -.8 -4"     
         class="flex-entity venue-entity"
         id="camile-click-the-image" 
-        visible="true"
+        visible="false"
 >
         <a-plane color="#CCC" height="0.65" width="2.5" position="0.25 0 2.5" material="" geometry=""></a-plane>
         <a-entity template="src: #link" data-src="#360venue02" data-thumb="#camile" scale="0.5 0.5 1" position="-0.65 0.05 2.6">
@@ -376,7 +380,7 @@
 
       AFRAME.registerComponent('nftinfo', {
         schema: {
-          price: {default:'default'},
+          price: {default:'not listed'},
           marketplace: {default:'default'},
           eltotoggle:{default:'default'},
           url:{default:'default'},
@@ -391,7 +395,8 @@
           var text = 'value: '+data.title+ ': this digital asset is ';
           text += data.price + '.';
           text +='You can see it on '
-          text += data.marketplace+' by clicking the image.';
+          text += data.marketplace+' by clicking the image.'
+          text += data.marketplace+" Listed assets' early buyers are going to be whitelisted for future projects.";
 
            el.addEventListener('mouseenter', function () {
               eltotoggle.setAttribute("visible", false);
@@ -413,8 +418,9 @@
  AFRAME.registerComponent('chatinfo', {
         schema: {
           text: {default:'default'},
-          eltotoggle:{default:'default'},
           texttotoggle:{default:'default'},
+          eltotoggle:{default:'default'},
+          delay:{default:1000},
         },        
         init: function () {
           var data = this.data;
@@ -422,11 +428,13 @@
           var eltotoggle = document.getElementById(data.eltotoggle);
           var texttotoggle = document.getElementById(data.texttotoggle);
           var text = 'value: '+data.text;
+          var delay = data.delay;
 
            el.addEventListener('mouseenter', function () {
               eltotoggle.setAttribute("visible", false);
               texttotoggle.setAttribute("text", text);
-              eltotoggle.setAttribute("visible", true);
+              setTimeout(() => { eltotoggle.setAttribute("visible", true);}, delay);
+
          });   
          
           el.addEventListener('mouseleave', function () {
@@ -436,6 +444,91 @@
                   
         }
       });
+
+ AFRAME.registerComponent('start', {
+        schema: {
+          text: {default:'default'},
+          mousemovetext: {default:'default'},
+          texttotoggle:{default:'default'},
+          eltotoggle:{default:'default'},
+          delay:{default:1000},
+        },        
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+          var eltotoggle = document.getElementById(data.eltotoggle);
+          var texttotoggle = document.getElementById(data.texttotoggle);
+          var text = 'value: '+data.text;
+          var mousemovetext = 'value: '+data.mousemovetext;
+          var delay = data.delay;
+          var started = el.getAttribute('started');
+
+
+          // el.addEventListener('mouseenter', function () {
+              eltotoggle.setAttribute("visible", false);
+              texttotoggle.setAttribute("text", text);
+              setTimeout(() => { eltotoggle.setAttribute("visible", true);}, delay);
+
+         //});   
+        
+          setTimeout(() => { 
+                    eltotoggle.setAttribute("visible", false);
+
+                    document.getElementById('camera').addEventListener('rotationChanged', e => {
+                    
+                      started = el.getAttribute('started');
+
+                      if (started) {
+            console.log("started");
+
+          }
+          else
+          {
+                        console.log("not started");
+
+         
+                           texttotoggle.setAttribute("text", mousemovetext);
+                    setTimeout(() => {eltotoggle.setAttribute("visible", true); 
+                            var markedasstarted = el.setAttribute("started", true);
+}, 1000);
+                      }
+                    //console.log('New rotation:', e.detail);
+                
+
+                  });
+
+          }, delay+5000);
+
+
+
+
+                           
+        }
+      });
+
+
+    AFRAME.registerComponent('rotation-listener', {
+  tick() {
+    const newValue = this.el.getAttribute('rotation');
+    const stringCoords = AFRAME.utils.coordinates.stringify(newValue);
+    if (this.lastValue !== stringCoords) {
+      this.el.emit('rotationChanged', newValue);
+      this.lastValue = stringCoords;
+    }
+  },
+});
+
+AFRAME.registerComponent('position-listener', {
+  tick() {
+    const newValue = this.el.getAttribute('position');
+    const stringCoords = AFRAME.utils.coordinates.stringify(newValue);
+    if (this.lastValue !== stringCoords) {
+      this.el.emit('positionChanged', newValue);
+      this.lastValue = stringCoords;
+    }
+  },
+});
+
     AFRAME.registerComponent("scenelistener", {
       init: function () {
         let vrcam = document.querySelector("#cam-vr");
