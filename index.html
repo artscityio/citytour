@@ -178,10 +178,13 @@
         scale="1.5 1.5"
       >
         <a-plane
+          class="clickable"
           color="#000"
           height="0.75"
           width="2"
           position="10 0 -10"
+          chatinfo="text:The CryptoArt Museum is coming soon. Follow us on Twitter to keep up to date.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
+
         ></a-plane>
         <a-entity
           text="value: The CryptoArt Museum; color: #fff; align: center; width:3;"
@@ -200,7 +203,7 @@
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
-        togglescenes="show:venue-entity;hide:flex-entity;text:Hover the images for more details.:camera_rotation=0 20 0"
+        togglescenes="show:venue-entity;hide:flex-entity;text:Hover the images for more details.;camera_rotation:0 -80 -10"
         chatinfo="text:This is my particular venue. I use it to showcase some NFTs from my wallet. You are invited to come in.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
       >
 
@@ -240,12 +243,17 @@
         position="-1.12 -1.48 7.244"
         visible="true"
         rotation="0 165 0"
+        chatinfo="text:The Metamodern Art Gallery is under construction. It will be powered by advanced VR Tech. Follow us on Twitter to keep up to date.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
+
       >
         <a-plane
+         class="clickable" 
           color="#000"
           height="0.75"
           width="2"
           position="10 0 -10"
+          event-set__mouseenter="scale: 1.2 1.2 1"
+          event-set__mouseleave="scale: 1 1 1"
         ></a-plane>
         <a-entity
           text="value: Metamodern Art Gallery; color: #fff; align: center; width:4;"
@@ -261,11 +269,11 @@
 
       <!-- back to the city banner -->
       <a-entity class="venue-entity flex-entity"           
-                togglescenes="show:city-entity;hide:flex-entity"
+                togglescenes="show:city-entity;hide:flex-entity;camera_position:0 0 0;camera_rotation:0 -233 0"
                 id="back-to-the-city"
                 layout="margin: 0; angle: NaN; columns: 2" 
                 position="4.87125 2.26612 6.41826" 
-                visible="" 
+                visible="false" 
                 rotation="-0.599886811501972 -166.68029809709805 2.531900496683108" 
                 scale="1.5 1.5 1">
         <a-plane 
@@ -288,33 +296,7 @@
       </a-entity>
 
 
-      <!-- camile chat city-->
-      <a-entity position="-.25 .8 -4"
-      class="city-entity flex-entity"
-      id="camile-chat-city"
-      visible="false">
-        <a-plane
-          color="#CCC"
-          height="0.75"
-          width="2.5"
-          position=".25 0 2.5"
-        ></a-plane>
-        <a-entity
-          template="src: #link"
-          data-src="#artscity"
-          data-thumb="#camile"
-          scale="0.5 0.5"
-          position="-.65 0 2.6"
-        ></a-entity>
-        <a-entity
-          text="value: Hello, welcome to ArtsCity - The Arts' Metaverse. My name is Camile, and I am your host today.  Please feel free to walk around.; color: #000"
-          position=".45 .015 2.6"
-          scale="1.5 1.5 1.5"
-        >
-        </a-entity>
-      </a-entity>
-
-      <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
+    <!-- Camera + cursor. --dutration: 9000-from: 0 5.5 5; to: 0 2.6 -4; -->
       <a-entity
         id="camera-rig"
         animation="property: position; from: 0 8 0; to: 0 0.0 0;  dur: 6001; easing: linear; loop: false"
@@ -334,7 +316,9 @@
             geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.0375;"
 
           ></a-cursor>
-           <!-- camile click the image-->
+           
+          
+      <!-- camile click the image-->
       <a-entity 
         position="-0.21436 -.8 -4"     
         class="flex-entity venue-entity"
@@ -382,6 +366,11 @@
             if (data.camera_rotation !=="none"){
               var rotatecam = document.getElementById('camera-rig').setAttribute('rotation',data.camera_rotation);
               console.log(data.camera_rotation);
+            }
+
+            if (data.camera_position !=="none"){
+              var rotatecam = document.getElementById('camera-rig').setAttribute('position',data.camera_position);
+              console.log(data.camera_position);
             }
           });        
          
@@ -451,6 +440,11 @@
                scene.removeAttribute('start');
               }
          });   
+
+              el.addEventListener('mouseleave', function () {
+              eltotoggle.setAttribute("visible", false);
+          });   
+         
          
          
         }
@@ -485,7 +479,9 @@
           var started = el.getAttribute('started');
           var scene = document.querySelector('a-scene')
 
-
+          document.getElementById('camera').addEventListener('rotationChanged', e => {
+            console.log(document.getElementById('camera').getAttribute('rotation'));
+          })
 
              eltotoggle.setAttribute("visible", false);
               texttotoggle.setAttribute("text", text);
@@ -505,12 +501,7 @@
                 });
 
               }, delay+5000);
-}
-
-
-
-                           
-//        }
+          }
       });
 
 
