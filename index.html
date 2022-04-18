@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Welcome to ArtsCity</title>
     <link
       rel="icon"
       href="https://artscity.io/wp-content/uploads/2022/02/cropped-arts-city-logo-icon-city-192x192.png"
@@ -200,8 +200,8 @@
         position="-3.9 -1.5 -3.4"
         visible="true"
         rotation="0 65 0"
-        togglescenes="show:venue-entity;hide:flex-entity"
-        chatinfo="text:I use my apartment to showcase NFTs from my wallet. Just click on the black tag to take a look.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
+        togglescenes="show:venue-entity;hide:flex-entity;text:Hover the images for more details.:camera_rotation=0 20 0"
+        chatinfo="text:This is my particular venue. I use it to showcase some NFTs from my wallet. You are invited to come in.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
       >
 
       
@@ -217,6 +217,8 @@
         event-set__click="_target: #image-360; _delay: 300; material.src: #360venue01;"
         proxy-event="event: click; to: #image-360; as: fade"
         sound="on: click; src: #click-sound"
+        chatinfo="text:Hover the images to get details of the NFTs.;eltotoggle:camile-click-the-image;texttotoggle:chat-text;"
+
               
 
         ></a-plane>
@@ -353,7 +355,9 @@
       AFRAME.registerComponent('togglescenes', {
         schema: {
           show: {default:'default'},
-          hide: {default:'default'}
+          hide: {default:'default'},
+          text: {default:'none'},
+          camera_rotation: {default:'none'}
         },        
         init: function () {
           var data = this.data;
@@ -364,15 +368,21 @@
            el.addEventListener('click', function () {
             for (var i=0; i < classToHide.length; i++) {
             classToHide[i].setAttribute("visible", false);
-            classToHide[i].classList.remove("clickable");
-         
+            classToHide[i].classList.remove("clickable");         
             }
             for (var i=0; i < classToShow.length; i++) {
             classToShow[i].setAttribute("visible", true);
             classToShow[i].classList.add("clickable");
-
             }
-      
+
+            if (data.text !=="none"){
+              var showchat = chatinfo(data.text);
+            }
+
+            if (data.camera_rotation !=="none"){
+              var rotatecam = document.getElementById('camera-rig').setAttribute('rotation',data.camera_rotation);
+              console.log(data.camera_rotation);
+            }
           });        
          
         }
@@ -433,19 +443,30 @@
            el.addEventListener('mouseenter', function () {
               eltotoggle.setAttribute("visible", false);
               texttotoggle.setAttribute("text", text);
-              setTimeout(() => { eltotoggle.setAttribute("visible", true);}, delay);
+              setTimeout(() => { eltotoggle.setAttribute("visible", true);}, 1000);
 
+              var scene = document.querySelector('a-scene')
+               //let scene = document.getElementById('a');
+              if (scene.hasAttribute('start')){
+               scene.removeAttribute('start');
+              }
          });   
          
-          el.addEventListener('mouseleave', function () {
-             eltotoggle.setAttribute("visible", false);
-
-         });   
-                  
+         
         }
       });
 
- AFRAME.registerComponent('start', {
+
+      function chatinfo(text){
+         var text = 'value: '+text;
+         var chat_el = document.getElementById("camile-click-the-image");
+         var chat_text = document.getElementById("chat-text");
+         chat_el.setAttribute("visible", false);
+         chat_text.setAttribute("text", text);
+         chat_el.setAttribute("visible", true);
+      }
+
+ AFRAME.registerComponent('start', {  
         schema: {
           text: {default:'default'},
           mousemovetext: {default:'default'},
@@ -462,48 +483,34 @@
           var mousemovetext = 'value: '+data.mousemovetext;
           var delay = data.delay;
           var started = el.getAttribute('started');
+          var scene = document.querySelector('a-scene')
 
 
-          // el.addEventListener('mouseenter', function () {
-              eltotoggle.setAttribute("visible", false);
+
+             eltotoggle.setAttribute("visible", false);
               texttotoggle.setAttribute("text", text);
-              setTimeout(() => { eltotoggle.setAttribute("visible", true);}, delay);
+              setTimeout(() => { 
+                eltotoggle.setAttribute("visible", true);
+              }, delay);
+              setTimeout(() => { 
+                eltotoggle.setAttribute("visible", false);
+                document.getElementById('camera').addEventListener('rotationChanged', e => {
+                  if (scene.hasAttribute('start')) {
+                  texttotoggle.setAttribute("text", mousemovetext);
+                  setTimeout(() => {
+                    eltotoggle.setAttribute("visible", true);
+                     
+                  }, 1000);
+                }
+                });
 
-         //});   
-        
-          setTimeout(() => { 
-                    eltotoggle.setAttribute("visible", false);
-
-                    document.getElementById('camera').addEventListener('rotationChanged', e => {
-                    
-                      started = el.getAttribute('started');
-
-                      if (started) {
-            console.log("started");
-
-          }
-          else
-          {
-                        console.log("not started");
-
-         
-                           texttotoggle.setAttribute("text", mousemovetext);
-                    setTimeout(() => {eltotoggle.setAttribute("visible", true); 
-                            var markedasstarted = el.setAttribute("started", true);
-}, 1000);
-                      }
-                    //console.log('New rotation:', e.detail);
-                
-
-                  });
-
-          }, delay+5000);
-
+              }, delay+5000);
+}
 
 
 
                            
-        }
+//        }
       });
 
 
@@ -534,14 +541,7 @@ AFRAME.registerComponent('position-listener', {
         let vrcam = document.querySelector("#cam-vr");
         let dcam = document.querySelector("#cam-desktop");
         let cursor = document.querySelector("[cursor]");
-        //console.clear(); /*from   ww  w.de mo  2  s .c  o m*/
-        //console.log("init");
-        //console.log("vrcam:");
-        //console.log(vrcam);
-        //console.log("dcam:");
-        //console.log(dcam);
-        //console.log("cursor:");
-        //console.log(cursor);
+
         this.el.sceneEl.addEventListener("enter-vr", function () {
           cursor.setAttribute("visible", true);
           dcam.setAttribute("camera", "active", false);
